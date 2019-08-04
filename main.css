@@ -1,0 +1,142 @@
+.h1 {
+  margin-top: 50px;
+  font-size: 25px;
+}
+.progress-bar {
+  position: relative;
+  width: 100%;
+  display: flex;
+  height: 22px;
+  border-radius: 5px;
+  background: #e9ecef;
+  font-weight: bold;
+}
+.progress-line {
+  height: 100%;
+  font-size: 15px;
+  font-weight: bold;
+  width: 33%;
+  border-radius: 5px;
+  background: #007bff;
+  color: white;
+}
+.create__title {
+  width: 60%;
+}
+.create__priority {
+  width: 15%;
+}
+.create {
+  display: flex;
+  justify-content: space-between;
+}
+.todo-box > * {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+}
+.todo-box input {
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #ced4da;
+  padding-left: 10px;
+  height: 40px;
+  font-size: 18px;
+}
+.create .create__priority {
+  padding-left: 20px;
+  color: #495057;
+}
+.create__btn {
+  width: 15%;
+  color: #007bff;
+  background: transparent;
+  border: 1.5px solid #007bff;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 5px;
+  font-size: 18px;
+  outline: none;
+}
+.create__btn:hover {
+  background: #007bff;
+  transition: 0.5s;
+  color: white;
+}
+.create__btn:focus {
+  outline: none;
+}
+.search input {
+  width: 100%;
+}
+.donefilter,
+.sort {
+  display: flex;
+  margin: 1rem 0;
+}
+.donefilter button,
+.sort button {
+  color: #007bff;
+  background: white;
+  border: 1.5px solid #007bff;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 40px;
+  line-height: 20px;
+}
+.donefilter button:focus {
+  outline: none;
+}
+.donefilter button:first-child,
+.sort button:first-child {
+  border-right: 0px solid;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.sort button:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.donefilter button:last-child {
+  border-left: 0px solid;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.donefilter .donefilter_active,
+.sort .sort_active {
+  background: #007bff;
+  color: white;
+}
+.list__task {
+  display: flex;
+  align-self: auto;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  justify-content: space-between;
+  border: 1.5px solid #ced4da;
+  border-bottom: none;
+  padding: 0 25px;
+}
+.list__task p {
+  margin: 0;
+  color: #212529;
+  font-weight: 500;
+  font-size: 18px;
+}
+.list__task:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.list__task:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom: 1.5px solid #ced4da;
+}
+.list .fa-times {
+  cursor: pointer;
+}
