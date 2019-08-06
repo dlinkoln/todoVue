@@ -27,14 +27,22 @@
               </div>
               <hr />
               <div class="create">
-                <input type="text" placeholder="Title" class="create__title" />
                 <input
+                  type="text"
+                  placeholder="Title"
+                  class="create__title"
+                  v-model="newTask.content"
+                />
+                <input
+                  v-model="newTask.priority"
                   type="number"
                   class="create__priority"
                   min="0"
                   max="20"
                 />
-                <button type="submit" class="create__btn">Create</button>
+                <button type="submit" class="create__btn" @click="createTask">
+                  Create
+                </button>
               </div>
               <hr />
               <div class="search">
@@ -58,7 +66,7 @@
                   <p :class="{ list__task_done: el.completed }">
                     {{ el.content }}
                   </p>
-                  <i class="close">&times;</i>
+                  <i class="close" @click="delTask(i)">&times;</i>
                 </div>
               </div>
             </div>
