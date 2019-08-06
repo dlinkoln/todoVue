@@ -88,6 +88,12 @@
   height: 40px;
   line-height: 20px;
 }
+.donefilter button:hover,
+.sort button:hover {
+  background: #007bff;
+  color: white;
+  transition: 0.5s;
+}
 .donefilter button:focus {
   outline: none;
 }
@@ -127,6 +133,7 @@
   color: #212529;
   font-weight: 500;
   font-size: 18px;
+  cur
 }
 .list__task:first-child {
   border-top-left-radius: 5px;
@@ -136,6 +143,9 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   border-bottom: 1.5px solid #ced4da;
+}
+.list__task_done {
+  text-decoration: line-through;
 }
 .list .fa-times {
   cursor: pointer;

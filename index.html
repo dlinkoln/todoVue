@@ -28,7 +28,12 @@
               <hr />
               <div class="create">
                 <input type="text" placeholder="Title" class="create__title" />
-                <input type="number" class="create__priority" />
+                <input
+                  type="number"
+                  class="create__priority"
+                  min="0"
+                  max="20"
+                />
                 <button type="submit" class="create__btn">Create</button>
               </div>
               <hr />
@@ -45,17 +50,15 @@
                 <button class="descending">Descending</button>
               </div>
               <div class="list">
-                <div class="list__task">
-                  <p>Text task</p>
-                  <i class=" fa fa-times"></i>
-                </div>
-                <div class="list__task">
-                  <p>Text task</p>
-                  <i class=" fa fa-times"></i>
-                </div>
-                <div class="list__task">
-                  <p>Text task</p>
-                  <i class=" fa fa-times"></i>
+                <div
+                  class="list__task"
+                  v-for="(el, i) in tasks"
+                  @click="doTask(i)"
+                >
+                  <p :class="{ list__task_done: el.completed }">
+                    {{ el.content }}
+                  </p>
+                  <i class="close">&times;</i>
                 </div>
               </div>
             </div>
@@ -63,7 +66,6 @@
         </div>
       </div>
     </div>
-    <script src="https://use.fontawesome.com/2152393855.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="main.js"></script>
   </body>
