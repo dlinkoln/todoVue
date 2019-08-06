@@ -12,7 +12,7 @@ var app = new Vue({
       this.tasks.splice(i, 1);
     },
     createTask() {
-      this.tasks.push(this.newTask);
+      this.tasks.push({ ...this.newTask });
     }
   }
 });

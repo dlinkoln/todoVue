@@ -133,6 +133,7 @@
   color: #212529;
   font-weight: 500;
   font-size: 18px;
+  cursor: pointer;
 }
 .list__task:first-child {
   border-top-left-radius: 5px;
