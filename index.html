@@ -19,10 +19,15 @@
         <div class="row">
           <div class="col-xl-6 mx-auto">
             <div class="todo-box">
-              <div class="h1">Tasks - 1/3</div>
+              <div class="h1">
+                Tasks - {{ taskAmountDone }} / {{ taskAmount }}
+              </div>
               <div class="progress-bar">
-                <div class="progress-line">
-                  33%
+                <div
+                  class="progress-line"
+                  :style="{width:((taskAmountDone / taskAmount)*100)+'%'}"
+                >
+                  {{ (taskAmountDone / taskAmount) * 100 }}%
                 </div>
               </div>
               <hr />
@@ -32,6 +37,7 @@
                   placeholder="Title"
                   class="create__title"
                   v-model="newTask.content"
+                  @keyup.enter="createTask"
                 />
                 <input
                   v-model="newTask.priority"
@@ -39,6 +45,7 @@
                   class="create__priority"
                   min="0"
                   max="20"
+                  @keyup.enter="createTask"
                 />
                 <button type="submit" class="create__btn" @click="createTask">
                   Create
@@ -46,24 +53,53 @@
               </div>
               <hr />
               <div class="search">
-                <input type="text" placeholder="Search" />
+                <input type="text" placeholder="Search" v-model="searchValue" />
               </div>
               <div class="donefilter">
-                <button class="all donefilter_active">All</button>
-                <button class="done">Done</button>
-                <button class="undone">Undone</button>
+                <button
+                  class="all"
+                  :class="{ 'donefilter_active': doneFilterState.all }"
+                  @click="taskAllFilter"
+                >
+                  All
+                </button>
+                <button
+                  class="done"
+                  @click="taskDoneFilter"
+                  :class="{ 'donefilter_active':doneFilterState.done  }"
+                >
+                  Done
+                </button>
+                <button
+                  class="undone"
+                  @click="taskUndoneFilter"
+                  :class="{ 'donefilter_active':doneFilterState.undone  }"
+                >
+                  Undone
+                </button>
               </div>
               <div class="sort">
-                <button class="ascending sort_active">Ascending</button>
-                <button class="descending">Descending</button>
+                <button
+                  class="ascending "
+                  :class="{ 'sort_active':ascendingFilterState.asc  }"
+                  @click="ascendingFilter"
+                >
+                  Ascending
+                </button>
+                <button
+                  @click="descendingFilter"
+                  class="descending"
+                  :class="{ 'sort_active':ascendingFilterState.desc  }"
+                >
+                  Descending
+                </button>
               </div>
               <div class="list">
-                <div
-                  class="list__task"
-                  v-for="(el, i) in tasks"
-                  @click="doTask(i)"
-                >
-                  <p :class="{ list__task_done: el.completed }">
+                <div class="list__task" v-for="(el, i) in filtredTasks">
+                  <p
+                    :class="{ list__task_done: el.completed }"
+                    @click="doTask(i)"
+                  >
                     {{ el.content }}
                   </p>
                   <i class="close" @click="delTask(i)">&times;</i>

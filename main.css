@@ -15,10 +15,11 @@
   height: 100%;
   font-size: 15px;
   font-weight: bold;
-  width: 33%;
+  width: 0%;
   border-radius: 5px;
   background: #007bff;
   color: white;
+  transition: 1s;
 }
 .create__title {
   width: 60%;
