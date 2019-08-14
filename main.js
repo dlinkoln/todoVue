@@ -1,91 +1,90 @@
 var app = new Vue({
   el: "#app",
   data: {
-    tasks: [{ content: "Task 1", completed: false }],
-    newTask: { content: "Default task", completed: false, priority: 0 },
-    filtredTasks: [],
-    doneFilterState: { all: true, done: false, undone: false },
-    ascendingFilterState: { asc: false, desc: false },
+    tasks: [{ content: "Task 1", completed: false, priority: 1 }],
+    newTask: { content: "Default task", completed: false, priority: 1 },
+    filterSetting: "all",
     searchValue: ""
   },
   methods: {
     doTask(i) {
-      this.tasks[i].completed = !this.tasks[i].completed;
+      this.globalFilter[i].completed = !this.tasks[i].completed;
     },
     delTask(i) {
       this.tasks.splice(i, 1);
-      this.filtredTasks = this.tasks.slice();
     },
     createTask() {
       this.tasks.push({ ...this.newTask });
-      this.filtredTasks = this.tasks.slice();
-      this.doneFilterState.all = true;
-      this.doneFilterState.done = false;
-      this.doneFilterState.undone = false;
     },
     taskAllFilter() {
-      this.filtredTasks = this.tasks.slice();
-      this.doneFilterState.all = true;
-      this.doneFilterState.done = false;
-      this.doneFilterState.undone = false;
+      this.filterSetting = "all";
     },
     taskDoneFilter() {
-      this.filtredTasks = this.tasks.filter(
-        currentTask => currentTask.completed
-      );
-      this.doneFilterState.all = false;
-      this.doneFilterState.done = true;
-      this.doneFilterState.undone = false;
+      this.filterSetting = "done";
     },
     taskUndoneFilter() {
-      this.filtredTasks = this.tasks.filter(
-        currentTask => !currentTask.completed
-      );
-      this.doneFilterState.all = false;
-      this.doneFilterState.done = false;
-      this.doneFilterState.undone = true;
+      this.filterSetting = "undone";
     },
-    ascendingFilter() {
-      this.filtredTasks = this.tasks.sort(function(a, b) {
-        if (a.content < b.content) {
-          return 1;
-        }
-        if (a.content > b.content) {
-          return -1;
-        }
-        return 0;
-      });
-      this.ascendingFilterState.asc = true;
-      this.ascendingFilterState.desc = false;
+    taskAscFilter() {
+      this.filterSetting = "asc";
     },
-    descendingFilter() {
-      this.ascendingFilterState.asc = false;
-      this.ascendingFilterState.desc = true;
-      this.filtredTasks = this.tasks.sort(function(a, b) {
-        if (a.content > b.content) {
-          return 1;
-        }
-        if (a.content < b.content) {
-          return -1;
-        }
-        return 0;
-      });
+    taskDescFilter() {
+      this.filterSetting = "desc";
     }
   },
-  created: function() {
-    this.filtredTasks = this.tasks.slice();
-  },
+  created() {},
   computed: {
-    searchFilter: function() {
-      return (this.filtredTasks = this.tasks.filter(el => {
-        return el.content.match(this.searchValue);
-      }));
+    globalFilter: function() {
+      let filteredArr = [];
+      switch (this.filterSetting) {
+        case "done":
+          filteredArr = this.tasks.filter(el => el.completed == true);
+          console.log(this.filterSetting);
+          break;
+        case "undone":
+          filteredArr = this.tasks.filter(el => el.completed == false);
+          console.log(this.filterSetting);
+          break;
+        case "asc":
+          filteredArr = this.tasks.slice().sort((a, b) => {
+            debugger;
+            return a.priority - b.priority;
+          });
+          console.log(this.filterSetting);
+          break;
+        case "desc":
+          filteredArr = this.tasks.slice().sort((a, b) => {
+            return b.priority - a.priority;
+          });
+          console.log(this.filterSetting);
+          break;
+        case "all":
+        default:
+          filteredArr = this.tasks;
+          console.log(this.filterSetting);
+      }
+      if (this.searchValue != "") {
+        filteredArr = this.tasks.filter(el =>
+          el.content.toLowerCase().includes(this.searchValue)
+        );
+      }
+      return filteredArr;
     },
     taskAmount: function() {
       return this.tasks.length;
     },
     taskAmountDone: function() {
       return this.tasks.filter(currentTask => currentTask.completed).length;
+    },
+    taskEqulation: function() {
+      if (this.tasks.length == 0) {
+        return 0;
+      } else {
+        return (
+          this.tasks.filter(currentTask => currentTask.completed).length /
+          this.tasks.length
+        );
+      }
     }
   }
 });

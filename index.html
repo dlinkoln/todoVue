@@ -25,9 +25,9 @@
               <div class="progress-bar">
                 <div
                   class="progress-line"
-                  :style="{width:((taskAmountDone / taskAmount)*100)+'%'}"
+                  :style="{width:(taskEqulation*100)+'%'}"
                 >
-                  {{ (taskAmountDone / taskAmount) * 100 }}%
+                  {{ taskEqulation * 100 }}%
                 </div>
               </div>
               <hr />
@@ -58,7 +58,7 @@
               <div class="donefilter">
                 <button
                   class="all"
-                  :class="{ 'donefilter_active': doneFilterState.all }"
+                  :class="{ 'donefilter_active': filterSetting=='all' }"
                   @click="taskAllFilter"
                 >
                   All
@@ -66,14 +66,14 @@
                 <button
                   class="done"
                   @click="taskDoneFilter"
-                  :class="{ 'donefilter_active':doneFilterState.done  }"
+                  :class="{ 'donefilter_active': filterSetting== 'done'  }"
                 >
                   Done
                 </button>
                 <button
                   class="undone"
                   @click="taskUndoneFilter"
-                  :class="{ 'donefilter_active':doneFilterState.undone  }"
+                  :class="{ 'donefilter_active':filterSetting=='undone'  }"
                 >
                   Undone
                 </button>
@@ -81,27 +81,32 @@
               <div class="sort">
                 <button
                   class="ascending "
-                  :class="{ 'sort_active':ascendingFilterState.asc  }"
-                  @click="ascendingFilter"
+                  :class="{ 'sort_active':filterSetting == 'asc'  }"
+                  @click="taskAscFilter"
                 >
                   Ascending
                 </button>
                 <button
-                  @click="descendingFilter"
+                  @click="taskDescFilter"
                   class="descending"
-                  :class="{ 'sort_active':ascendingFilterState.desc  }"
+                  :class="{ 'sort_active':filterSetting == 'desc'  }"
                 >
                   Descending
                 </button>
               </div>
               <div class="list">
-                <div class="list__task" v-for="(el, i) in filtredTasks">
+                <div
+                  class="list__task"
+                  v-for="(el, i) in globalFilter"
+                  :key="el.content"
+                >
                   <p
                     :class="{ list__task_done: el.completed }"
                     @click="doTask(i)"
                   >
                     {{ el.content }}
                   </p>
+                  <span class="list__priority">{{ el.priority }}</span>
                   <i class="close" @click="delTask(i)">&times;</i>
                 </div>
               </div>

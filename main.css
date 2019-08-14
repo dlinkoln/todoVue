@@ -151,3 +151,6 @@
 .list .fa-times {
   cursor: pointer;
 }
+.list__priority {
+  color: #007bff;
+}
