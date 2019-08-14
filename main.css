@@ -154,3 +154,14 @@
 .list__priority {
   color: #007bff;
 }
+@media screen and (max-width: 576px) {
+  .create__title {
+    width: 45%;
+  }
+  .create__priority {
+    width: 20%;
+  }
+  .create__btn {
+    width: 25%;
+  }
+}
