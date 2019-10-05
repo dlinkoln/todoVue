@@ -39,29 +39,23 @@ var app = new Vue({
       switch (this.filterSetting) {
         case "done":
           filteredArr = this.tasks.filter(el => el.completed == true);
-          console.log(this.filterSetting);
           break;
         case "undone":
           filteredArr = this.tasks.filter(el => el.completed == false);
-          console.log(this.filterSetting);
           break;
         case "asc":
           filteredArr = this.tasks.slice().sort((a, b) => {
-            debugger;
             return a.priority - b.priority;
           });
-          console.log(this.filterSetting);
           break;
         case "desc":
           filteredArr = this.tasks.slice().sort((a, b) => {
             return b.priority - a.priority;
           });
-          console.log(this.filterSetting);
           break;
         case "all":
         default:
           filteredArr = this.tasks;
-          console.log(this.filterSetting);
       }
       if (this.searchValue != "") {
         filteredArr = this.tasks.filter(el =>
